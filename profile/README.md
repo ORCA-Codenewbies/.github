@@ -199,7 +199,7 @@ flowchart TB
     HOST --> CI
 ```
 
-> **Implementation note:** The two major repositories currently documented in the ORCA organization have distinct responsibilities. `backend-ORCA` provides the HTTP/API layer, authentication, sessions, rate limiting, and Supabase integration, while `agent-orchestration` contains the conversational routing, DAG-based orchestration, domain agents, marine ML inference, and safety logic.
+> **Implementation note:** The two major repositories currently documented in the ORCA organization have distinct responsibilities. `backend` provides the HTTP/API layer, authentication, sessions, rate limiting, and Supabase integration, while `agent-orchestration` contains the conversational routing, DAG-based orchestration, domain agents, marine ML inference, and safety logic.
 
 ---
 
@@ -285,9 +285,9 @@ ORCA combines conversational AI with specialized predictive models.
 | Weather risk | **XGBoost** | Weather hazard assessment |
 | Marine risk | **XGBoost** | Overall marine-risk assessment |
 | Ocean suitability | **XGBoost** | Ocean-condition suitability scoring |
-| Productivity | **LSTM / Keras** | Environmental fish-productivity forecasting |
+| Productivity | **LSTM** | Environmental fish-productivity forecasting |
 
-The current `agent-orchestration` implementation contains the domain-specific model inference, while `backend-ORCA` delegates reasoning requests to that layer.
+The current `agent-orchestration` implementation contains the domain-specific model inference, while `backend` delegates reasoning requests to that layer.
 
 ---
 
@@ -307,7 +307,7 @@ ORCA is designed around multi-source marine intelligence.
 
 The current repository implementations distinguish between data sources that are directly consumed by a component and sources accessed by delegated domain agents.
 
-For example, `backend-ORCA` directly uses Supabase for database-backed state and observations, while the live INCOIS/IMD/Open-Meteo integrations are handled by the domain/orchestration layer.
+For example, `backend` directly uses Supabase for database-backed state and observations, while the live INCOIS/IMD/Open-Meteo integrations are handled by the domain/orchestration layer.
 
 ---
 
@@ -522,7 +522,7 @@ The organization is structured around separate components rather than placing th
 
 | Repository | Primary Responsibility |
 |---|---|
-| `backend-ORCA` | FastAPI gateway, authentication, sessions, rate limiting and Supabase integration |
+| `backend` | FastAPI gateway, authentication, sessions, rate limiting and Supabase integration |
 | `agent-orchestration` | Conversational routing, multi-agent orchestration, domain agents, ML inference and safety logic |
 
 Additional repositories/components can be added to this map as the ORCA platform evolves.
@@ -535,7 +535,7 @@ The organization contains a working prototype architecture, but the current repo
 
 In particular:
 
-- `backend-ORCA` currently provides the HTTP/API layer and depends on the sibling `agent-orchestration` repository.
+- `backend` currently provides the HTTP/API layer and depends on the sibling `agent-orchestration` repository.
 - `agent-orchestration` currently provides the standalone CLI reasoning/orchestration interface.
 - Some external providers are configurable or delegated to the orchestration layer.
 - The backend currently uses in-memory session state with Supabase persistence support.
